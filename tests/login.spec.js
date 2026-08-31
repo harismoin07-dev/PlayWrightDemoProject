@@ -15,7 +15,7 @@ test.describe('Login Tests', () => {
     });
 
     test('login test', async ({ page }) => {
-    await loginPage.login('Admin', 'admin123');
+    await loginPage.login();
     const dashboardHeaderText = await dashboardPage.getDashboardHeaderText();
     expect(dashboardHeaderText).toBe('Dashboard');
 
