@@ -6,6 +6,7 @@ class DashboardPage {
         this.searchInput = page.getByRole('textbox', { name: 'Search' });
         this.sidepanelLabel = page.getByLabel('sidePanel').locator('span');
         this.leaveMenuItem = page.getByRole('link', { name: 'Leave' });
+        this.adminMenuItem = page.getByRole('link', { name: 'Admin' });
         this.leaveLink = page.getByRole('link', { name: 'Leave' });
     }
 
@@ -29,7 +30,9 @@ class DashboardPage {
         await this.leaveMenuItem.waitFor({ state: 'visible' });
         return await this.leaveMenuItem.textContent();
     }
-
+    async clickAdminMenu() {
+        await this.adminMenuItem.click();
+    }
     async isLeaveMenuVisible() {
         return await this.leaveMenuItem.isVisible();
     }
