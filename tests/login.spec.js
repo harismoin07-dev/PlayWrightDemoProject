@@ -3,8 +3,7 @@ const { LoginPage } = require('../pages/loginPage');
 const { DashboardPage } = require('../pages/DashboardPage');
 const { allure } = require('allure-playwright');
 
-test.describe('Login Tests', () => {
-
+test.describe('Login Module', () => {
     let loginPage;
     let dashboardPage;
 
@@ -15,52 +14,48 @@ test.describe('Login Tests', () => {
     });
 
     test('login test', async ({ page }) => {
-    allure.epic('Login Tests');
-    allure.feature('Login Feature');
-    allure.story('Valid Login Test');
-    allure.description('This test verifies that a user can log in with valid credentials.');
-    allure.severity('critical');
+        allure.epic('Login Module');
+        allure.feature('Login');
+        allure.story('Valid Login');
+        allure.description('This test verifies that a user can log in with valid credentials.');
+        allure.severity('critical');
 
-    // Step 1: Perform login with valid credentials
-    await test.step('Perform login with valid credentials', async () => {
-        await loginPage.login();
-        await expect(dashboardPage.dashboardHeader).toBeVisible();
-        const screenshot = await page.screenshot(); 
-        await allure.attachment('Login Step Screenshot', screenshot, 'image/png');
+        await test.step('Perform login with valid credentials', async () => {
+            await loginPage.login();
+            await expect(dashboardPage.dashboardHeader).toBeVisible();
+            const screenshot = await page.screenshot();
+            await allure.attachment('Login Step Screenshot', screenshot, 'image/png');
+        });
+
+        await test.step('Verify dashboard heading', async () => {
+            await expect(dashboardPage.dashboardHeader).toBeVisible();
+            const dashboardHeader = await dashboardPage.getDashboardHeaderText();
+            expect(dashboardHeader).toBe('Dashboard');
+            const dashboardScreenshot = await page.screenshot();
+            await allure.attachment('Dashboard Heading Verification Screenshot', dashboardScreenshot, 'image/png');
+        });
     });
 
-    // Step 2: Verify dashboard heading
-    await test.step('Verify dashboard heading', async () => {
-        await expect(dashboardPage.dashboardHeader).toBeVisible();
-        const dashboardHeader = await dashboardPage.getDashboardHeaderText();
-        expect(dashboardHeader).toBe('Dashboard');
-        const dashboardScreenshot = await page.screenshot();
-        await allure.attachment('Dashboard Heading Verification Screenshot', dashboardScreenshot, 'image/png');
-    });
-    });
+    test('invalid credentials show error', async ({ page }) => {
+        allure.epic('Login Module');
+        allure.feature('Login');
+        allure.story('Invalid Login');
+        allure.description('This test verifies that an error message is displayed when logging in with invalid credentials.');
+        allure.severity('normal');
 
-    test('Invalid login test', async ({ page }) => {
-    allure.epic('Login Tests');
-    allure.feature('Login Feature');
-    allure.story('Invalid Login Test');
-    allure.description('This test verifies that an error message is displayed when logging in with invalid credentials.');
-    allure.severity('high');
+        await test.step('Perform login with invalid credentials', async () => {
+            await loginPage.login('Admin', 'wrongpassword');
+            await expect(loginPage.errorMessage).toBeVisible();
+            const invalidLoginScreenshot = await page.screenshot();
+            await allure.attachment('Invalid Login Step Screenshot', invalidLoginScreenshot, 'image/png');
+        });
 
-    // Step 1: Perform login with invalid credentials
-    await test.step('Perform login with invalid credentials', async () => {
-        await loginPage.login('Admin', 'wrongpassword');
-        await expect(loginPage.errorMessage).toBeVisible();
-        const invalidLoginScreenshot = await page.screenshot();
-        await allure.attachment('Invalid Login Step Screenshot', invalidLoginScreenshot, 'image/png');
-    });
-
-    // Step 2: Verify error message is displayed
-    await test.step('Verify error message is displayed', async () => {
-        await expect(loginPage.errorMessage).toBeVisible();
-        const errorMessage = await loginPage.getErrorMessage();
-        expect(errorMessage).toBe('Invalid credentials');
-        const invalidLoginScreenshot = await page.screenshot();
-        await allure.attachment('Error Message Verification Screenshot', invalidLoginScreenshot, 'image/png');
-    });
+        await test.step('Verify error message is displayed', async () => {
+            await expect(loginPage.errorMessage).toBeVisible();
+            const errorMessage = await loginPage.getErrorMessage();
+            expect(errorMessage).toBe('Invalid credentials');
+            const invalidLoginScreenshot = await page.screenshot();
+            await allure.attachment('Error Message Verification Screenshot', invalidLoginScreenshot, 'image/png');
+        });
     });
 });

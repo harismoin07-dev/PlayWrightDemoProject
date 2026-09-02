@@ -9,7 +9,6 @@ class LeavePage {
 
     async selectTakenLeave() {
         await this.page.locator('span').filter({ hasText: 'Pending Approval' }).locator('i').click();
-        await this.page.waitForTimeout(5000);
         await this.leaveTypeArrow.click();
         await this.takenOption.click();
     }
