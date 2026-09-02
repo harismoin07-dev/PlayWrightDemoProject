@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"This test verifies that an error message is displayed when logging in with invalid credentials.","16387","invalid credentials show error","chromium","2026-09-02","passed","2026-09-02","Login Module","login.spec.js","",""
+"This test verifies that filtering the Leave list by Taken returns the expected single record result.","25666","leave list shows one record when status is Taken","chromium","2026-09-02","passed","2026-09-02","Leave Module","leave.spec.js","",""
+"This test verifies that a user can log in with valid credentials.","18372","login test","chromium","2026-09-02","passed","2026-09-02","Login Module","login.spec.js","",""
+"This test verifies that the dashboard search box is available and the Leave menu is present on the dashboard.","18315","dashboard search is available and leave menu exists","chromium","2026-09-02","passed","2026-09-02","Dashboard Module","dashboard.spec.js","",""

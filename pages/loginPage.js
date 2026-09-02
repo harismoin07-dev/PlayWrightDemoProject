@@ -12,9 +12,11 @@ class LoginPage extends BasePage {
 
 
     async login(username = this.username, password = this.password) {
-    await this.fill(this.usernameInput, username);
-    await this.fill(this.passwordInput, password);
-    await this.click(this.loginButton);
+    await this.usernameInput.waitFor({ state: 'visible' });
+    await this.passwordInput.waitFor({ state: 'visible' });
+    await this.usernameInput.fill(username);
+    await this.passwordInput.fill(password);
+    await this.loginButton.click();
     }
     async getErrorMessage() {
         // Ensure the error message is visible and return its text
