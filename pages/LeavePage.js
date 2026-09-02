@@ -14,7 +14,7 @@ class LeavePage {
     }
     async clickSearch() {
         await this.searchButton.click();
-    }    
+    }
 
     async filterByTakenStatus() {
         await this.selectTakenLeave();

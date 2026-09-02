@@ -6,6 +6,7 @@ exports.test = base.test.extend({
         const loginPage = new LoginPage(page);
         await loginPage.navigate();
         await loginPage.login();
+        await page.waitForURL(/dashboard\/index/);
         await use(page);
     }
 });
