@@ -1,6 +1,8 @@
-class LeavePage {
+const { BasePage } = require('./BasePage');
+
+class LeavePage extends BasePage {
     constructor(page) {
-        this.page = page;
+        super(page);
         this.leaveTypeArrow = page.locator('.oxd-select-text').first();
         this.takenOption = page.getByRole('option', { name: 'Taken' });
         this.searchButton = page.getByRole('button', { name: 'Search' });
@@ -9,11 +11,11 @@ class LeavePage {
 
     async selectTakenLeave() {
         await this.page.locator('span').filter({ hasText: 'Pending Approval' }).locator('i').click();
-        await this.leaveTypeArrow.click();
-        await this.takenOption.click();
+        await this.click(this.leaveTypeArrow);
+        await this.click(this.takenOption);
     }
     async clickSearch() {
-        await this.searchButton.click();
+        await this.click(this.searchButton);
     }
 
     async filterByTakenStatus() {
