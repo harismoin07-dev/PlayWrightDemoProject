@@ -11,8 +11,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      APP_USERNAME: ${{ secrets.APP_USERNAME }}
-      APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+      APP_USERNAME: ${{ secrets.APP_USERNAME || 'Admin' }}
+      APP_PASSWORD: ${{ secrets.APP_PASSWORD || 'admin123' }}
       CI: true
 
     steps:
